@@ -23,13 +23,15 @@ sudo apt -y update
 sudo apt install -y git-all curl
 
 # installs pip3
-sudo apt install python3-pip
+sudo apt install -y python3-pip
 
 # installs virtualenv
 pip3 install virtualenv
 pip3 install virtualenvwrapper
 
-echo "VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5" | sudo tee -a ~/.bashrc
+echo "
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5
+" | sudo tee -a ~/.bashrc
 source ~/.bashrc
 
 echo "
@@ -55,8 +57,8 @@ pip install nltk gensim
 cd $HOME
 echo "Create Jupyter password"
 echo "---"
-read -s -p "Input password for Jupyter notebook: " passwd
-read -s -p "Please confirm password: " passwd_confirm
+read -p "Input password for Jupyter notebook: " passwd
+read -p "Please confirm password: " passwd_confirm
 while [ "$passwd" != "$passwd_confirm" ]
 	do
 		echo "***"
@@ -89,8 +91,8 @@ c.NotebookApp.port = 8888
 " | sudo tee -a $jupyter_config
 
 ### setting up git
-read -s -p "Input GitHub username: " $github_username
+read -p "Input GitHub username: " $github_username
 git config --global user.name "$github_username"
-read -s -p "Input Github email address: " $github_email
+read -p "Input Github email address: " $github_email
 git config --global user.email "$github_email"
 git config --global core.editor vi
