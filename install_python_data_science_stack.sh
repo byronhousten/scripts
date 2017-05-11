@@ -63,17 +63,7 @@ while [ "$passwd" != "$passwd_confirm" ]
 done
 
 # setting up Jupyter
-# 
-# create password based on above
-# create .py file for this
-# import sys
-# from IPython.lib import passwd
-#
-# # Create hash of password
-# passwd_hash = passwd(sys.argv[1])
-# c = open("passwd_hash.txt", 'w')
-# c.write(passwd_hash)
-# c.close()
+ipython passwd.py $passwd
 passwd_file = "$HOME/passwd_hash.txt"
 passwd_hash = 'cat $passwd_file'
 rm $passwd_file
