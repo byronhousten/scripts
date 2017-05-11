@@ -3,8 +3,9 @@
 
 # Installation Instructions
 #
-# 1. download script
-# wget www.byronhousten.com/install_python_analytics_stack.sh
+# 1. download scripts
+# wget www.github.com/byronhousten/scripts/install_python_data_science_stack.sh
+# wget www.github.com/byronhousten/scripts/passwd.py
 #
 # 2. make it executable
 # chmod a+x install_python_analytics_stack.sh
