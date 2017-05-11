@@ -20,7 +20,7 @@ export LC_ALL="en_US.UTF-8"
 sudo apt -y update
 
 # install linux functionality
-sudo apt install -y git curl
+sudo apt install -y git-all curl
 
 # installs pip3
 sudo apt install python3-pip
@@ -29,7 +29,8 @@ sudo apt install python3-pip
 pip3 install virtualenv
 pip3 install virtualenvwrapper
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5
+echo "VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5" | sudo tee -a ~/.bashrc
+source ~/.bashrc
 
 echo "
 export WORKON_HOME=$HOME/.virtualenvs
@@ -75,7 +76,6 @@ path_to_pem = "$HOME/.certs/jupyter.pem"
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $path_to_pem -out $path_to_pem
 
 jupyter notebook --generate-config
-cd ~/.jupyter/
 jupyter_config = ~/.jupyter/jupyter_notebook_config.py
 echo "
 c = get_config()
@@ -84,6 +84,13 @@ c.NotebookApp.certfile = u'/home/ubuntu/.certs/jupyter.pem'
 c.NotebookApp.ip = '*'
 c.NotebookApp.open_browser = False
 
-c.NotebookApp.password = u''
+c.NotebookApp.password = u'$passwd_hash'
 c.NotebookApp.port = 8888
 " | sudo tee -a $jupyter_config
+
+### setting up git
+read -s -p "Input GitHub username: " $github_username
+git config --global user.name "$github_username"
+read -s -p "Input Github email address: " $github_email
+git config --global user.email "$github_email"
+git config --global core.editor vi
