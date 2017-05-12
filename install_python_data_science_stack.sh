@@ -10,8 +10,8 @@
 # 2. make it executable
 # chmod a+x install_python_analytics_stack.sh
 #
-# 3. Run it (in screen)
-# screen ./install_python_analytics_stack.sh
+# 3. Run it
+# ./install_python_analytics_stack.sh
 
 # sets LC_ALL environment variable - Ubuntu server often does not specify this
 export LC_ALL="en_US.UTF-8"
@@ -41,7 +41,7 @@ source $HOME/.local/bin/virtualenvwrapper.sh
 " | sudo tee -a ~/.profile
 
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
+export PROJECT_HOME=$HOME/Projects	
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 # create & activate virtual environment
@@ -71,17 +71,18 @@ done
 
 # setting up Jupyter
 ipython passwd.py $passwd
-passwd_file = "$HOME/passwd_hash.txt"
-passwd_hash = 'cat $passwd_file'
+passwd_file="$HOME/passwd_hash.txt"
+passwd_hash=$(cat $passwd_file)
 rm $passwd_file
 
 mkdir $HOME/.certs
 cd $HOME/.certs
-path_to_pem = "$HOME/.certs/jupyter.pem"
+path_to_pem="$HOME/.certs/jupyter.pem"
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout $path_to_pem -out $path_to_pem
 
 jupyter notebook --generate-config
-jupyter_config = ~/.jupyter/jupyter_notebook_config.py
+jupyter_config=~/.jupyter/jupyter_notebook_config.py
+
 echo "
 c = get_config()
 c.IPKernelApp.pylab = 'inline'
