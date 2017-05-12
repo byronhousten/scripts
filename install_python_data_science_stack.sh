@@ -32,14 +32,17 @@ pip3 install virtualenvwrapper
 echo "
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5
 " | sudo tee -a ~/.bashrc
-source ~/.bashrc
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.5
 
 echo "
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 source $HOME/.local/bin/virtualenvwrapper.sh
 " | sudo tee -a ~/.profile
-source ~/.profile
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Projects
+source $HOME/.local/bin/virtualenvwrapper.sh
 
 # create & activate virtual environment
 mkvirtualenv data-science
