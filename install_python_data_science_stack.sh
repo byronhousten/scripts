@@ -57,6 +57,19 @@ pip install cookiecutter
 # text processing stack
 pip install nltk gensim
 
+# installing XGBoost
+cd $HOME
+git clone --recursive https://github.com/dmlc/xgboost
+cd xgboost
+make -j4
+cd python-package
+python setup.py install
+echo "
+export PYTHONPATH=~/xgboost/python-package
+" | sudo tee -a ~/.bashrc
+export PYTHONPATH=~/xgboost/python-package
+
+# setting up Jupyter notebook
 cd $HOME
 echo "Create Jupyter password"
 echo "---"
@@ -69,7 +82,6 @@ while [ "$passwd" != "$passwd_confirm" ]
 		read -s -p "Please confirm password: " passwd_confirm
 done
 
-# setting up Jupyter
 ipython passwd.py $passwd
 passwd_file="$HOME/passwd_hash.txt"
 passwd_hash=$(cat $passwd_file)
